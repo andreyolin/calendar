@@ -1,0 +1,46 @@
+.calendar {
+  padding: 20px;
+  margin: 0 auto;
+  width: 60%;
+
+  &__header {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &__form {
+      display: flex;
+      gap: 10px;
+      &__button {
+        cursor: pointer;
+      }
+    }
+
+    &__nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+
+      &__chooser {
+        display: flex;
+        justify-content: space-between;
+        width: 200px;
+
+        &__button {
+          cursor: pointer;
+        }
+      }
+
+      &__date {
+        width: 17px;
+      }
+    }
+  }
+
+  &__body {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+  }
+}
