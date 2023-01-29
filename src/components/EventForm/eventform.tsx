@@ -2,8 +2,9 @@ import moment from 'moment';
 import React, {
   Dispatch, SetStateAction, useEffect, useState,
 } from 'react';
-import uuid from 'react-uuid';
-import { addOne, deleteOne, updateOne } from '../../api/api';
+import {
+  addOne, deleteOne, getAll, updateOne,
+} from '../../api/api';
 import { dayCell } from '../../types/dayCell';
 import { dayEvent } from '../../types/dayEvent';
 
@@ -20,9 +21,13 @@ export const EventForm: React.FC<Props> = ({ onSetFormIsShowing, choosenDay, cur
   const [time, setTime] = useState('');
 
   const handleSubmit = () => {
+    const events: dayEvent[] = getAll();
+
+    const maxID = Math.max(...events.map(event => Number(event.id)));
+
     const newEvent = {
-      createdAt: moment().format('HH:mm d MMMM YYYY'),
-      id: uuid(),
+      createdAt: moment().format('HH:mm DD MMMM YYYY'),
+      id: maxID,
       dayId: choosenDay?.id,
       title,
       description,
@@ -34,6 +39,7 @@ export const EventForm: React.FC<Props> = ({ onSetFormIsShowing, choosenDay, cur
       addOne(newEvent);
     } else {
       updateOne({
+        updatedAt: moment().format('HH:mm DD MMMM YYYY'),
         id: currentEvent?.id,
         title,
         date,
@@ -83,7 +89,11 @@ export const EventForm: React.FC<Props> = ({ onSetFormIsShowing, choosenDay, cur
       <h3>Title*</h3>
 
       {currentEvent && (
-        <p>{`Created at ${currentEvent?.createdAt}`}</p>
+        currentEvent.createdAt ? (
+          <p>{`Created at ${currentEvent?.createdAt}`}</p>
+        ) : (
+          <p>{`Updated at ${currentEvent?.updatedAt}`}</p>
+        )
       )}
 
       <input
@@ -118,6 +128,7 @@ export const EventForm: React.FC<Props> = ({ onSetFormIsShowing, choosenDay, cur
       </div>
 
       <button
+        className="eventForm__saveButton"
         type="submit"
         disabled={!title || !date}
         onClick={handleSubmit}
@@ -128,7 +139,11 @@ export const EventForm: React.FC<Props> = ({ onSetFormIsShowing, choosenDay, cur
       {currentEvent && (
         <button
           type="submit"
-          onClick={() => deleteOne(currentEvent?.id)}
+          onClick={(event) => {
+            deleteOne(currentEvent?.id);
+            onSetFormIsShowing(false);
+            event?.preventDefault();
+          }}
         >
           Delete
         </button>

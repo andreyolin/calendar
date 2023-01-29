@@ -7,7 +7,7 @@ export const client = {
 
     localStorage.setItem('events', JSON.stringify([...dayEvents, data]));
   },
-  delete: (eventid: string) => {
+  delete: (eventid: number) => {
     const dayEvents:dayEvent[] = client.get();
 
     const newArrayOfDayEvents = dayEvents.filter(event => event.id !== eventid);

@@ -1,5 +1,5 @@
 export type dayEvent = {
-  id: string
+  id: number,
   createdAt?: string,
   updatedAt?: string,
   dayId?: string,

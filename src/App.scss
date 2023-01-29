@@ -2,8 +2,10 @@
 @import "./Styles/cell.scss";
 @import "./Styles/eventForm.scss";
 
+*,
 body,
 h1,
 p {
   margin: 0;
+  transition-duration: 0.3s;
 }

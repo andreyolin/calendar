@@ -41,7 +41,7 @@ export const Day: React.FC<Props> = ({
         <p>{dayOfWeek}</p>
       </div>
 
-      <div>
+      <div className="cell__content__events">
         {currentEvents.map(event => (
           <span
             key={event.id}

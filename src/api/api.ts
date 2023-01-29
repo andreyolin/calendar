@@ -9,7 +9,7 @@ export function addOne(data: dayEvent) {
   return client.post(data);
 }
 
-export function deleteOne(eventId:string) {
+export function deleteOne(eventId:number) {
   return client.delete(eventId);
 }
 

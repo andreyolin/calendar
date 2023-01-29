@@ -13,16 +13,6 @@ export const Calendar: React.FC = () => {
   const [formIsShowing, setFormIsShowing] = useState(false);
   const [currentEvent, setCurrentEvent] = useState<dayEvent>();
 
-  // const saveFilters = () => {
-  //   const currentFilters = {
-  //     year,
-  //     month,
-  //     choosenDay,
-  //   };
-
-  //   localStorage.setItem('filters', JSON.stringify(currentFilters));
-  // };
-
   const day = moment(`${year}-${month}-01`).format('D');
 
   moment.updateLocale('en', { week: { dow: 1 } });
@@ -84,20 +74,6 @@ export const Calendar: React.FC = () => {
     setMonth(Number(newDate[1]));
     setChosenDay(neededDay);
   };
-
-  // useEffect(() => {
-  //   const currentFilters = JSON.parse((localStorage.getItem('filters') || '[]'));
-
-  //   if (currentFilters.length > 0) {
-  //     setYear(currentFilters.year);
-  //     setMonth(currentFilters.month);
-  //     setChosenDay(currentFilters.choosenDay);
-  //   }
-  // }, []);
-
-  // useEffect(() => {
-  //   saveFilters();
-  // }, [year, month, choosenDay]);
 
   return (
     <div className="calendar">
